@@ -22,6 +22,27 @@ export class WebAudioComponent implements OnInit {
     AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
     this.context = new AudioContext();
 
+
+      // Tap into navigator.media devices to catch device-change events...
+    if (typeof navigator.mediaDevices === 'undefined' )
+    {
+      console.log ("navigator mediaDevices api not defined on this system");
+    }
+    else 
+    {
+      console.log ("navigator mediaDevices api is supported on this system");
+
+      if (typeof navigator.mediaDevices.ondevicechange === 'undefined') 
+      {
+      console.log ("navigator mediaDevices ondevicechange api not defined on this system");
+      }
+      navigator.mediaDevices.ondevicechange = (event) => {
+          
+        console.log ("navigator mediaDevices ondevicechange");
+      };
+    }
+
+
     this.loadingAudio = true;
     this.fetchAudio()
         .then(audioBuffer => {
@@ -29,7 +50,7 @@ export class WebAudioComponent implements OnInit {
             console.log("Audio file loaded");
             this.audioBuffer = audioBuffer;
 
-            this.startPlayback();
+            this.playbackStopped = true;
           })
         .catch(error =>  {
           console.log("Caught exception :" + error);
@@ -102,6 +123,7 @@ export class WebAudioComponent implements OnInit {
         bufferSource.buffer = this.audioBuffer;
         bufferSource.connect(this.context.destination);
         bufferSource.start();
+        this.playbackStopped = false;
         this.source = bufferSource;
         this.buttonStatus = "Pause";
         console.log('starting playback');
