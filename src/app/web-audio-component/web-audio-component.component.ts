@@ -60,7 +60,7 @@ export class WebAudioComponent implements OnInit {
   fetchAudio(): Promise<AudioBuffer> {
 
     //set the audio file's URL
-    var audioURL="assets/audio/01 Can't Buy Me Love.mp3";
+    var audioURL="assets/audio/Her Majesty.mp3";
 
     return fetch(audioURL)
         .then(response => response.arrayBuffer())
