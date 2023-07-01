@@ -32,14 +32,23 @@ export class WebAudioComponent implements OnInit {
     {
       console.log ("navigator mediaDevices api is supported on this system");
 
-      if (typeof navigator.mediaDevices.ondevicechange === 'undefined') 
-      {
-      console.log ("navigator mediaDevices ondevicechange api not defined on this system");
-      }
-      navigator.mediaDevices.ondevicechange = (event) => {
-          
-        console.log ("navigator mediaDevices ondevicechange");
-      };
+      const constraints = {
+              audio: true,
+            };
+
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(() => {
+          navigator.mediaDevices.ondevicechange = (event) => {
+            console.log(
+              'Now navigator mediaDevices ondevicechange works',
+              event
+            );
+          };
+        })
+        .catch((err) => {
+          console.log(`${err.name}: ${err.message}`);
+        });   
     }
 
 
