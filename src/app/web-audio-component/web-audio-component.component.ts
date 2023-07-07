@@ -33,24 +33,55 @@ export class WebAudioComponent implements OnInit {
       console.log ("navigator mediaDevices api is supported on this system");
 
       const constraints = {
-              audio: true,
-            };
+        audio: true
+      };
 
       navigator.mediaDevices
         .getUserMedia(constraints)
         .then(() => {
+
           navigator.mediaDevices.ondevicechange = (event) => {
             console.log(
               'Now navigator mediaDevices ondevicechange works',
               event
             );
           };
+
+          if (!navigator.mediaDevices?.enumerateDevices) {
+            console.log("enumerateDevices() not supported.");
+          } else {
+    
+            let audioDevices: string[] = [];
+            let ndx: number = 0;
+      
+              // List audio output devices
+            navigator.mediaDevices
+              .enumerateDevices()
+              .then((devices) => {
+                devices.forEach((device) => {
+    
+                  console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
+                  if (device.kind === 'audiooutput') {
+    
+                    audioDevices[ndx++] = device.deviceId;
+                  }
+                });
+    
+                if (ndx === 0) {
+                  console.log("No audiooutput devices were enumerated.");
+                }
+    
+              })
+              .catch((err) => {
+                console.error(`${err.name}: ${err.message}`);
+              });
+          }
         })
         .catch((err) => {
           console.log(`${err.name}: ${err.message}`);
         });   
-    }
 
+    }
 
     this.loadingAudio = true;
     this.fetchAudio()
