@@ -18,6 +18,8 @@ Verify that playback continues through the original output device.
 
 Teseting remote devices requires setting up a local server.  Nginx is a simple server that works well and is easy to set up. 
 
+NOTE:  The mediaDevices api is only available in a secure context, so it will be necessary to set up an nginx server with a self-signed certificate with openssl. 
+
 Running an Angular app with nginx:  https://medium.com/@technicadil_001/deploy-an-angular-app-with-nginx-a79cc1a44b49
 Running nginx on Mac OS: https://adamtheautomator.com/nginx-on-mac/
 
