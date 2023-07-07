@@ -4,9 +4,9 @@ This project utilzes the Web Audio API to play audio in a simple web page.
 
 This purpose of his project is to test hot-swapping an external audio output device with audio playpack in progress.
 
-The project also tests if the mediaDevices api is available on the system, and also tests getUserDevices(), ondevicechange(),  and enumerateDevices().
+The project also tests if the mediaDevices api is available on the system, and also tests getUserMedia(), ondevicechange(),  and enumerateDevices().
 
-Note that the availablity of mediaDevices relies upon a secure context, and that the call to getUserDevices() will initiate a user request for microphone permission.
+Note that the availablity of mediaDevices relies upon a secure context, and that the call to getUserMedia() will initiate a user request for microphone permission. If the request is denied, none of the mediaDevices entry points will return data.
 
 
 ## Steps to reproduce 
