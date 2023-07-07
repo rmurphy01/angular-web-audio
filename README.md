@@ -4,7 +4,10 @@ This project utilzes the Web Audio API to play audio in a simple web page.
 
 This purpose of his project is to test hot-swapping an external audio output device with audio playpack in progress.
 
-The project also tests if the MediaDevices api is available on the system.
+The project also tests if the mediaDevices api is available on the system, and also tests getUserDevices(), ondevicechange(),  and enumerateDevices().
+
+Note that the availablity of mediaDevices relies upon a secure context, and that the call to getUserDevices() will initiate a user request for microphone permission.
+
 
 ## Steps to reproduce 
 
@@ -22,6 +25,8 @@ NOTE:  The mediaDevices api is only available in a secure context, so it will be
 
 Running an Angular app with nginx:  https://medium.com/@technicadil_001/deploy-an-angular-app-with-nginx-a79cc1a44b49
 Running nginx on Mac OS: https://adamtheautomator.com/nginx-on-mac/
+
+Setting up secure server on nginx: https://istation.atlassian.net/wiki/spaces/~449337817/pages/2037022721/Setting+up+NGINX+with+a+Self-Signed+Certificate+on+macOS+X+Big+Sur
 
 
 ## Known issues 
